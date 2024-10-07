@@ -1,0 +1,29 @@
+[
+    {
+        "date": "2024-09-01",
+        "type": "Buy",
+        "asset": "AAPL",
+        "quantity": 10,
+        "price": 150,
+        "total": 1500,
+        "fees": 5
+    },
+    {
+        "date": "2024-08-20",
+        "type": "Sell",
+        "asset": "GOOG",
+        "quantity": 5,
+        "price": 1200,
+        "total": 6000,
+        "fees": 15
+    },
+    {
+        "date": "2024-07-15",
+        "type": "Dividend",
+        "asset": "TSLA",
+        "quantity": 2,
+        "price": 200,
+        "total": 400,
+        "fees": 2
+    }
+]

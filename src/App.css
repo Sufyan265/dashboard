@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+:root {
+    --primay-font-family: 'Nunito Sans', sans-serif;
+}
+
+*,
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--primay-font-family);
+    scroll-behavior: smooth;
+}
+
+.card-shadow {
+    box-shadow: 0 0 35px 5px #80808042;
+}

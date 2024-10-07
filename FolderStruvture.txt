@@ -1,0 +1,38 @@
+src/
+│
+├── assets/
+│   └── images/              # Store static images (logos, etc.)
+│
+├── components/              # Reusable components
+│   ├── AccountOverview.jsx   # For account overview and quick links
+│   ├── AssetAllocationChart.jsx # For displaying asset allocation charts
+│   ├── DashboardLayout.jsx   # Layout for the dashboard
+│   ├── Navbar.jsx            # Navigation bar
+│   ├── Sidebar.jsx           # Sidebar navigation
+│   ├── TransactionHistory.jsx # List of transactions
+│   └── PerformanceMetrics.jsx # For performance graphs and tables
+│
+├── hooks/                   # Custom React hooks (optional)
+│   └── useFetchData.js       # Custom hook for data fetching (could use React Query or SWR)
+│
+├── layouts/                 # Application layouts
+│   └── MainLayout.jsx        # Main layout including Navbar and Sidebar
+│
+├── pages/                   # Pages corresponding to routes
+│   ├── Dashboard.jsx         # Main dashboard page
+│   ├── Portfolio.jsx         # Portfolio details page
+│   ├── Transactions.jsx      # Transaction history page
+│   ├── Reports.jsx           # Tax information and reports page
+│   └── Settings.jsx          # User settings page (e.g., for 2FA, mobile access)
+│
+├── services/                # API calls or services
+│   ├── api.js                # Central file for handling API requests (with Axios/Fetch)
+│
+├── styles/                  # Tailwind and global styles
+│   └── index.css             # Tailwind imports and global CSS
+│
+├── App.jsx                  # Main application component
+├── main.jsx                 # Vite entry point
+├── router.jsx               # Application routing with React Router
+│
+└── tailwind.config.js       # Tailwind CSS configuration
