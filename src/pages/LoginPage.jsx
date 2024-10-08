@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import illustrationImage from '../assets/Rectangle 5.png';
+import logo from "../assets/logo.png"
 import { MdLock } from 'react-icons/md';
 import { useApiContext } from '../context/ApiContext';
 
@@ -39,6 +40,9 @@ const LoginPage = () => {
     return (
         <div className="min-h-full flex justify-center items-center">
             <div className="bg-white p-4 rounded-lg max-w-lg w-full">
+                <div className="logo-container w-full flex justify-center my-3">
+                    <img src={logo} alt="Loading..." className="md:max-h-14 max-h-12 object-contain mr-2" />
+                </div>
                 <div className="flex items-center justify-center min-h-screen bg-gray-100 w-full">
                     <div className="bg-white shadow-sm w-full rounded-md">
                         {/* Top Section */}
@@ -49,6 +53,7 @@ const LoginPage = () => {
                             </div>
                             <div>
                                 <img src={illustrationImage} alt="Loading..." className="max-h-28 object-contain" />
+                                {/* <img src={logo} alt="Loading..." className="max-h-12 object-contain mr-2" /> */}
                             </div>
                         </div>
 

@@ -20,8 +20,8 @@ const MainLayout = ({ children }) => {
             <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
             <div className="flex-grow">
                 <Navbar />
-                <button className="lg:hidden p-2" onClick={toggleSidebar}>
-                    <BsLayoutSidebarInset size={24} />
+                <button className="lg:hidden p-2 ml-2" onClick={toggleSidebar}>
+                    <BsLayoutSidebarInset size={26} />
                 </button>
                 <main className="p-6">{children}</main>
             </div>

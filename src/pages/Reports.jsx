@@ -1,5 +1,5 @@
 import React from 'react';
-import { PieChart, Pie, Cell, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Legend, ResponsiveContainer } from 'recharts';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import useFetchData from '../hooks/useFetchData';
 import TransactionPage from '../components/TransactionHistory';
@@ -17,13 +17,6 @@ const ReportPage = () => {
     if (error) {
         return <p className='text-red-600'>Error: {error.message}</p>;
     }
-
-    // Dummy data for charts
-    // const data = [
-    //     { name: 'Stocks', value: 40 },
-    //     { name: 'Bonds', value: 30 },
-    //     { name: 'Real Estate', value: 20 }
-    // ];
 
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
@@ -44,13 +37,15 @@ const ReportPage = () => {
                 <div className="bg-white p-4 card-shadow">
                     <h2 className="text-lg font-semibold mb-2">Total Portfolio Value: ${data.portfolio.totalValue}</h2>
                     {data.portfolio.monthlyData && (
-                        <LineChart width={450} height={200} data={data.portfolio.monthlyData}>
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip />
-                            <CartesianGrid stroke="#ccc" />
-                            <Line type="monotone" dataKey="value" stroke="#8884d8" />
-                        </LineChart>
+                        <ResponsiveContainer width="100%" height={200}>
+                            <LineChart data={data.portfolio.monthlyData}>
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <CartesianGrid stroke="#ccc" />
+                                <Line type="monotone" dataKey="value" stroke="#8884d8" />
+                            </LineChart>
+                        </ResponsiveContainer>
                     )}
                 </div>
 
@@ -85,13 +80,15 @@ const ReportPage = () => {
             <div className="mt-8 p-6 rounded-sm card-shadow bg-white">
                 <h2 className="text-xl font-semibold mb-4">Performance Metrics</h2>
                 {performanceData && (
-                    <LineChart width={1000} height={300} data={performanceData}>
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <CartesianGrid stroke="#ccc" />
-                        <Line type="monotone" dataKey="performance" stroke="#8884d8" />
-                    </LineChart>
+                    <ResponsiveContainer width="100%" height={300}>
+                        <LineChart data={performanceData}>
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <CartesianGrid stroke="#ccc" />
+                            <Line type="monotone" dataKey="performance" stroke="#8884d8" />
+                        </LineChart>
+                    </ResponsiveContainer>
                 )}
             </div>
 

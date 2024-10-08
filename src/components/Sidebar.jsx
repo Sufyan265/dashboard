@@ -51,7 +51,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                     </li>
                 </ul>
                 <div className="text-center mt-4">
-                    <p className="text-sm text-gray-500">© 2024 Your Company</p>
+                    <p className="text-sm text-gray-500">© 2024 EMERGING BONDS</p>
                 </div>
             </div>
         </div>
