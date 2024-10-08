@@ -17,3 +17,9 @@ body {
 .card-shadow {
     box-shadow: 0 0 35px 5px #80808042;
 }
+
+.logo {
+    filter: invert(1);
+    height: 3rem;
+    object-fit: contain;
+}

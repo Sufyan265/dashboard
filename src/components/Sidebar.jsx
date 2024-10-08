@@ -1,18 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from "../assets/logo.png"
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
     const location = useLocation();
     const [activeItem, setActiveItem] = useState(location.pathname);
+    const sidebarRef = useRef(null);
 
     const handleItemClick = (path) => {
         setActiveItem(path);
+        onClose(); // Close sidebar on item click
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (isOpen && sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                onClose();
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [isOpen, onClose]);
+
     return (
-        <div className="w-64 bg-gray-800 text-white min-h-screen p-4 flex flex-col">
+        <div ref={sidebarRef} className={`sidebar lg:w-64 w-52 bg-gray-800 text-white min-h-screen p-4 flex flex-col fixed md:relative transition-transform transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 z-50`}>
             <div className="mb-4">
-                <h2 className="text-xl font-bold">Company Name</h2>
+                <h2 className="text-xl font-bold flex justify-center">
+                    <img src={logo} alt="logo" className='logo'/>
+                </h2>
             </div>
             <div className="text-white py-4 flex flex-col justify-between h-full">
                 <ul className="space-y-4">

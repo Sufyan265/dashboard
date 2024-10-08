@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import illustrationImage from '../assets/Rectangle 5.png';
-import { MdLock } from 'react-icons/md';
 import { useApiContext } from '../context/ApiContext';
 
 const SignUp = () => {
@@ -15,7 +14,7 @@ const SignUp = () => {
         const { name, email, password, confirmPassword } = data;
 
         if (password !== confirmPassword) {
-            setError('confirmPassword', { message: 'Passwords do not match' });
+            alert('Passwords do not match');
             return;
         }
 
@@ -35,7 +34,7 @@ const SignUp = () => {
             navigate('/login');
         } catch (error) {
             console.error(error);
-            setError('apiError', { message: 'Sign Up failed. Please try again.' });
+            alert('Sign Up failed. Please try again.');
         }
     };
 
@@ -112,7 +111,7 @@ const SignUp = () => {
                                 </div>
                                 <button type="submit" className="w-full bg-primary text-white py-2 rounded-sm hover:bg-purple-950 transition-colors" disabled={isSubmitting}>
                                     {/* {isSubmitting ? <Loading size={25} /> : 'Sign Up'} */}
-                                    Sign Up
+                                    {isSubmitting ? 'Loading...' : 'Sign Up'}
                                 </button>
                             </form>
 

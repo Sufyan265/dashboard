@@ -32,7 +32,7 @@ const LoginPage = () => {
 
         } catch (error) {
             console.error(error);
-            setError('apiError', { message: 'Server error. Please try again later.' });
+            alert('Server error. Please try again later.');
         }
     };
 
@@ -89,7 +89,7 @@ const LoginPage = () => {
 
                                 <button type="submit" className="w-full bg-primary text-white py-2 rounded-sm hover:bg-purple-950 transition-colors" disabled={isSubmitting}>
                                     {/* {isSubmitting ? <Loading size={25} /> : 'Log In'} */}
-                                    Log In
+                                    {isSubmitting ? 'Loading...' : 'Log In'}
                                 </button>
                             </form>
 
