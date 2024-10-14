@@ -12,7 +12,7 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors, isSubmitting }, setError } = useForm();
 
     const onSubmit = async (data) => {
-        const { name, email, password, confirmPassword } = data;
+        const { name, username, email, address, dateOfBirth, password, confirmPassword } = data;
 
         if (password !== confirmPassword) {
             alert('Passwords do not match');
@@ -22,9 +22,11 @@ const SignUp = () => {
         try {
             const response = await axios.post(`${host}/api/users/register`, {
                 name,
+                username,
                 email,
-                password,
-                confirmPassword
+                address,
+                dateOfBirth,
+                password
             });
 
             if (response.status !== 200) {
@@ -55,7 +57,6 @@ const SignUp = () => {
                             </div>
                             <div>
                                 <img src={illustrationImage} alt="Loading..." className="max-h-28 object-contain" />
-                                {/* <img src={logo} alt="Loading..." className="max-h-12 object-contain mr-2" /> */}
                             </div>
                         </div>
 
@@ -74,6 +75,17 @@ const SignUp = () => {
                                     {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                                 </div>
                                 <div className="mb-4">
+                                    <label className="block text-gray-700">Username</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter username"
+                                        className={`w-full px-4 py-2 mt-2 border rounded-sm focus:outline-none focus:ring-2 ${errors.username ? 'border-red-500' : 'focus:ring-primary'}`}
+                                        {...register('username', { required: 'Username is required' })}
+                                        autoComplete='username'
+                                    />
+                                    {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username.message}</p>}
+                                </div>
+                                <div className="mb-4">
                                     <label className="block text-gray-700">Email</label>
                                     <input
                                         type="email"
@@ -83,6 +95,27 @@ const SignUp = () => {
                                         autoComplete='email'
                                     />
                                     {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700">Address</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter address"
+                                        className={`w-full px-4 py-2 mt-2 border rounded-sm focus:outline-none focus:ring-2 ${errors.address ? 'border-red-500' : 'focus:ring-primary'}`}
+                                        {...register('address', { required: 'Address is required' })}
+                                        autoComplete='address'
+                                    />
+                                    {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>}
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700">Date of Birth</label>
+                                    <input
+                                        type="date"
+                                        className={`w-full px-4 py-2 mt-2 border rounded-sm focus:outline-none focus:ring-2 ${errors.dateOfBirth ? 'border-red-500' : 'focus:ring-primary'}`}
+                                        {...register('dateOfBirth', { required: 'Date of Birth is required' })}
+                                        autoComplete='bday'
+                                    />
+                                    {errors.dateOfBirth && <p className="text-red-500 text-sm mt-1">{errors.dateOfBirth.message}</p>}
                                 </div>
                                 <div className="mb-4">
                                     <label className="block text-gray-700">Password</label>
@@ -115,7 +148,6 @@ const SignUp = () => {
                                     </div>
                                 </div>
                                 <button type="submit" className="w-full bg-primary text-white py-2 rounded-sm hover:bg-purple-950 transition-colors" disabled={isSubmitting}>
-                                    {/* {isSubmitting ? <Loading size={25} /> : 'Sign Up'} */}
                                     {isSubmitting ? 'Loading...' : 'Sign Up'}
                                 </button>
                             </form>

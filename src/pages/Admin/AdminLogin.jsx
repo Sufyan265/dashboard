@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useApiContext } from '../context/ApiContext';
-import Login from '../components/Login';
+import { useApiContext } from '../../context/ApiContext';
+import Login from '../../components/Login';
 
-const LoginPage = () => {
+const AdminLogin = () => {
     const { host } = useApiContext();
     const navigate = useNavigate();
 
@@ -22,9 +22,11 @@ const LoginPage = () => {
                 throw new Error(response.data);
             }
 
-            if (response.data.token) {
-                localStorage.setItem('authToken', response.data.token);
-                navigate('/');
+            if (response.data.isAdmin) {
+                localStorage.setItem('adminToken', response.data.token);
+                navigate('/admin');
+            } else {
+                alert('You are not an admin.');
             }
 
         } catch (error) {
@@ -35,9 +37,9 @@ const LoginPage = () => {
 
     return (
         <>
-            <Login onSubmit={onSubmit} heading="Welcome Back!" />
+            <Login onSubmit={onSubmit} heading="Login as Admin!" />
         </>
     );
 };
 
-export default LoginPage;
+export default AdminLogin;

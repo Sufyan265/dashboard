@@ -35,7 +35,7 @@ const ReportPage = () => {
             {/* Account Overview Section */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
                 <div className="bg-white p-4 card-shadow">
-                    <h2 className="text-lg font-semibold mb-2">Total Portfolio Value: ${data.portfolio.totalValue}</h2>
+                    <h2 className="text-lg font-semibold mb-2">Total Portfolio Value: £{data.portfolio.totalValue}</h2>
                     {data.portfolio.monthlyData && (
                         <ResponsiveContainer width="100%" height={200}>
                             <LineChart data={data.portfolio.monthlyData}>

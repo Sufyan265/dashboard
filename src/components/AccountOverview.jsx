@@ -20,7 +20,7 @@ const AccountOverview = ({ totalValue }) => {
         <div className="bg-white rounded-lg p-6 flex-1 relative card-shadow">
           <div className="absolute top-4 right-4 text-green-500">+4.7%</div>
           <h3 className="text-xl font-semibold mb-4">Total Portfolio Value</h3>
-          <p className="text-3xl font-bold">${totalValue.toLocaleString()}</p>
+          <p className="text-3xl font-bold">£{totalValue.toLocaleString()}</p>
           <div className="h-24 mt-4">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data}>

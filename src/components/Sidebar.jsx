@@ -46,9 +46,9 @@ const Sidebar = ({ isOpen, onClose }) => {
                     <li className={`${activeItem === '/reports' ? 'bg-gray-700' : 'hover:bg-gray-700'} rounded-lg transition duration-300`}>
                         <Link to="/reports" className="block px-4 py-2" onClick={() => handleItemClick('/reports')}>Reports</Link>
                     </li>
-                    <li className={`${activeItem === '/settings' ? 'bg-gray-700' : 'hover:bg-gray-700'} rounded-lg transition duration-300`}>
+                    {/* <li className={`${activeItem === '/settings' ? 'bg-gray-700' : 'hover:bg-gray-700'} rounded-lg transition duration-300`}>
                         <Link to="/settings" className="block px-4 py-2" onClick={() => handleItemClick('/settings')}>Settings</Link>
-                    </li>
+                    </li> */}
                 </ul>
                 <div className="text-center mt-4">
                     <p className="text-sm text-gray-500">© 2024 EMERGING BONDS</p>

@@ -1,5 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { useTable, useGlobalFilter } from 'react-table';
+import React, { useState } from 'react';
 
 // Global Filter component for searching
 const GlobalFilter = ({ filterInput, setFilterInput }) => (
@@ -7,105 +6,49 @@ const GlobalFilter = ({ filterInput, setFilterInput }) => (
         value={filterInput}
         onChange={e => setFilterInput(e.target.value)}
         placeholder="Search transactions..."
-        className="p-2 border border-gray-300 rounded mb-4"
+        className="p-2 border border-gray-300 rounded mb-6 text-lg"
     />
 );
 
-const TransactionPage = ({ transactionData = [] }) => {
+const TransactionHistory = ({ transactionData = [] }) => {
     const [filterInput, setFilterInput] = useState('');
 
-    // Define columns for the table
-    const columns = useMemo(
-        () => [
-            { Header: 'Date', accessor: 'date' },
-            { Header: 'Type', accessor: 'type' },
-            { Header: 'Asset', accessor: 'asset' },
-            { Header: 'Quantity', accessor: 'quantity' },
-            { Header: 'Price', accessor: 'price' },
-            { Header: 'Total', accessor: 'total' },
-            { Header: 'Fees', accessor: 'fees' },
-        ],
-        []
+    // Filtered data based on search input
+    const filteredData = transactionData.filter(transaction =>
+        Object.values(transaction).some(value =>
+            value.toString().toLowerCase().includes(filterInput.toLowerCase())
+        )
     );
-
-    // Use React Table hooks
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-        setGlobalFilter,
-        state,
-    } = useTable(
-        {
-            columns,
-            data: transactionData,
-        },
-        useGlobalFilter
-    );
-
-    // Set global filter from input
-    useEffect(() => {
-        setGlobalFilter(filterInput);
-    }, [filterInput, setGlobalFilter]);
 
     return (
-        <div className="p-6 bg-gray-100">
-            <h1 className="text-2xl font-bold mb-6">Transaction History</h1>
+        <div className="py-8 px-4 bg-gray-100">
+            <h1 className="text-xl md:text-3xl font-bold mb-8">Transaction History</h1>
 
             {/* Global Search Filter */}
             <GlobalFilter filterInput={filterInput} setFilterInput={setFilterInput} />
 
             {/* Transaction Table */}
-            <div className="bg-white p-4 shadow-md rounded">
-                <table {...getTableProps()} className="min-w-full table-auto">
+            <div className="bg-white shadow-md rounded">
+                <table className="min-w-full table-auto ">
                     <thead>
-                        {headerGroups.map((headerGroup) => {
-                            const { key, ...restHeaderGroupProps } = headerGroup.getHeaderGroupProps();
-                            return (
-                                <tr key={key} {...restHeaderGroupProps} className="bg-gray-200">
-                                    {headerGroup.headers.map(column => {
-                                        const { key, ...restColumnProps } = column.getHeaderProps();
-                                        return (
-                                            <th
-                                                key={key}
-                                                {...restColumnProps}
-                                                className="p-2 border-b border-gray-300 text-left text-sm font-semibold text-gray-700"
-                                            >
-                                                {column.render('Header')}
-                                            </th>
-                                        );
-                                    })}
-                                </tr>
-                            );
-                        })}
+                        <tr className="bg-primary text-white">
+                            <th className="p-2 border-b border-gray-300 text-left text-lg font-semibold">No.</th>
+                            <th className="p-2 border-b border-gray-300 text-left text-lg font-semibold">Date</th>
+                            <th className="p-2 border-b border-gray-300 text-left text-lg font-semibold">Amount</th>
+                        </tr>
                     </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {rows.length > 0 ? (
-                            rows.map((row, index) => {
-                                prepareRow(row);
-                                const { key, ...rowProps } = row.getRowProps();
-                                return (
-                                    <tr key={key} {...rowProps} className="hover:bg-gray-100">
-                                        {row.cells.map(cell => {
-                                            const { key: cellKey, ...cellProps } = cell.getCellProps();
-                                            return (
-                                                <td
-                                                    key={cellKey}
-                                                    {...cellProps}
-                                                    className="p-2 border-b border-gray-300 text-sm text-gray-700"
-                                                >
-                                                    {cell.render('Cell')}
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                );
-                            })
+                    <tbody>
+                        {filteredData.length > 0 ? (
+                            filteredData.map((transaction, index) => (
+                                <tr key={index} className="hover:bg-indigo-50 ">
+                                    <td className="p-2 border-b border-gray-300 text-lg text-gray-700">{index + 1}</td>
+                                    <td className="p-2 border-b border-gray-300 text-lg text-gray-700">{transaction.date}</td>
+                                    <td className="p-2 border-b border-gray-300 text-lg text-gray-700">{transaction.amount}</td>
+                                </tr>
+                            ))
                         ) : (
                             <tr>
-                                <td colSpan={7} className="text-center p-4 text-gray-500">
+                                <td colSpan={3} className="text-center p-6 text-lg text-gray-500">
                                     No matching transactions found.
                                 </td>
                             </tr>
@@ -117,4 +60,4 @@ const TransactionPage = ({ transactionData = [] }) => {
     );
 };
 
-export default TransactionPage;
+export default TransactionHistory;

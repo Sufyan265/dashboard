@@ -6,21 +6,27 @@ import { ApiProvider } from './context/ApiContext';
 import Home from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
 import NotFound from './components/NotFound';
+import AdminPanel from './pages/Admin/AdminPanel';
+import AdminPrivateRoute from './pages/Admin/AdminPrivateRoute';
+import AdminLogin from './pages/Admin/AdminLogin';
 
 const AppRouter = () => (
-  <ApiProvider>
-    <Router>
+  <Router>
+    <ApiProvider>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUp />} />
 
         <Route path="/*" element={<PrivateRoute><Home /></PrivateRoute>} />
 
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/*" element={<AdminPrivateRoute><AdminPanel /></AdminPrivateRoute>} />
+
         <Route path="*" element={<NotFound />} />
 
       </Routes>
-    </Router>
-  </ApiProvider>
+    </ApiProvider>
+  </Router>
 );
 
 export default AppRouter;
